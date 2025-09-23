@@ -2,7 +2,7 @@
 [![build-badge](https://github.com/gao-lab/ExpressionCopilot/actions/workflows/build.yml/badge.svg)](https://github.com/gao-lab/ExpressionCopilot/actions/workflows/build.yml)
 [![license-badge](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![Python>=3.10](https://img.shields.io/badge/python->=3.10-blue.svg)
-[![codecov](https://codecov.io/gh/gao-lab/ExpressionCopilot/graph/badge.svg?token=RIoNSWX7J1)](https://codecov.io/gh/gao-lab/ExpressionCopilot)
+[![codecov](https://codecov.io/gh/gao-lab/ExpressionCopilot/graph/badge.svg?token=jNR7RfQ0eL)](https://codecov.io/gh/gao-lab/ExpressionCopilot)
 ![PyPI](https://img.shields.io/pypi/v/expression_copilot?label=pypi)
 [![Downloads](https://static.pepy.tech/badge/expression_copilot)](https://pepy.tech/project/expression_copilot)
 
@@ -39,16 +39,14 @@ pip install expression_copilot[torch]
 ```
 
 ### Docker
-You could pull and use our docker image directly:
+You could use our docker image directly:
 
 ```sh
-docker pull huhansan666666/expression_copilot:latest
+# CPU version
+docker run -it --rm huhansan666666/expression_copilot:latest
 
 # GPU version
 docker run --gpus all -it --rm huhansan666666/expression_copilot:latest
-
-# CPU version
-docker run -it --rm huhansan666666/expression_copilot:latest
 ```
 
 ## Documentation
@@ -61,7 +59,7 @@ import scanpy as sc
 import numpy as np
 from expression_copilot import ExpressionCopilotModel
 
-# Load data
+# Load our sample data
 # adata.X is raw counts
 # adata.obsm['X_uni'] stores image embeddings of spots
 url = 'https://drive.google.com/uc?id=10WD9vFgsoMoTt6g3017XxNK_bq8qp3oM'
