@@ -1,0 +1,109 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.poetry]
+name = "expression_copilot"
+packages = [{include = "expression_copilot"}]
+version = "0.2.1"
+description = "Quantifying predictability of gene expression from histology image"
+readme = "README.md"
+license = "MIT"
+authors = ["Chen-Rui Xia <xiachenrui@mail.cbi.pku.edu.cn>"]
+keywords = ["spatialomics", "bioinfomatics"]
+homepage = "https://github.com/gao-lab/ExpressionCopilot"
+documentation = "https://github.com/gao-lab/ExpressionCopilot"
+repository = "https://github.com/gao-lab/ExpressionCopilot"
+classifiers = [
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Bio-Informatics"
+]
+
+
+[tool.poetry.dependencies]
+python = ">=3.10"
+numpy = ">1.21"
+scipy = ">1.14"
+scanpy = ">=1.9"
+pynndescent = ">=0.5"
+pyyaml = "*"
+scikit-misc = ">=0.3"
+leidenalg = "*"
+loguru = "*"
+faiss-cpu = "*"
+annoy = "*"
+ipython = "*"
+lightgbm = "*"
+
+torch = {version = ">=2.0", optional = true}
+torchvision = {version = "*", optional = true}
+torchaudio = {version = "*", optional = true}
+pytorch-lightning = {version = ">=2.1", optional = true}
+
+pytest = {version = "*", optional = true}
+pytest-sugar = {version = "*", optional = true}
+pytest-cov = {version = "*", optional = true}
+pytest-xdist = {version = "*", optional = true}
+jupyterlab = {version = "*", optional = true}
+jupyter_contrib_nbextensions = {version = "*", optional = true}
+jupytext = {version = "*", optional = true}
+nbformat = {version = "*", optional = true}
+pre-commit = {version = "*", optional = true}
+black = {version = "*", optional = true}
+isort = {version = "*", optional = true}
+py-spy = {version = "*", optional = true}
+patchworklib = {version = "*", optional = true}
+openslide-python = {version = "*", optional = true}
+openslide-bin = {version = "*", optional = true}
+opencv-python = {version = "*", optional = true}
+scikit-image = {version = "*", optional = true}
+einops = {version = "*", optional = true}
+ray = {version = "*", extras = ["default"], optional = true}
+tbb = {version = "*", optional = true}
+
+[tool.poetry.extras]
+dev = ["pytest", "pytest-sugar", "pytest-cov", "pytest-xdist",
+        "jupyterlab", "jupyter_contrib_nbextensions", "jupytext", "nbformat",
+        "pre-commit", "black", "isort", "py-spy", "patchworklib",
+        "opencv-python", "openslide-python", "openslide-bin", "scikit-image",
+        "einops", "ray", "tbb"]
+torch = ["torch", "torchvision", "torchaudio", "pytorch-lightning"]
+
+[tool.pyright]
+include = ["expression_copilot"]
+exclude = ["**/conda", "**/__pycache__", "**/.**"]
+ignore = ["resource/"]
+typeCheckingMode = "off"
+reportCallIssue = 'warning'
+
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["expression_copilot"]
+
+[tool.coverage.report]
+show_missing = true
+
+[tool.jupytext]
+formats = "ipynb,py:percent"
+
+[tool.black]
+line-length = 100
+
+[tool.flake8]
+max-line-length = 100
+
+[tool.isort]
+line_length = 100
