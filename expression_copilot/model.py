@@ -10,7 +10,7 @@ import scanpy as sc
 from loguru import logger
 
 from .baseline import Baseline
-from .mi import graph_signal
+from .mi import calc_eps
 from .pp import process_omics
 
 
@@ -57,9 +57,9 @@ class ExpressionCopilotModel:
             np.random.shuffle(image_emb)
             logger.warning("You are shuffling data!")
 
-        eps = graph_signal(image_emb, expr.T, k=k)
+        eps = calc_eps(image_emb, expr.T, k=k)
         self.gene_metrics = pd.DataFrame({"EPS": eps}, index=gene_name)
-        self.gene_metrics.sort_values(by="EPS", ascending=True, inplace=True)
+        self.gene_metrics.sort_values(by="EPS", ascending=False, inplace=True)
         logger.info(f"Gene metrics: \n{self.gene_metrics.head(3)}")
         return self.gene_metrics
 

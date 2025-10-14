@@ -14,7 +14,7 @@
 
 </div>
 
-We introduce two metrics: **EPS** (Expression Predictability Score) and **SPS** (Slice Predictability Score), to quantify the predictability of gene expression from histology image. Python package `expression_copilot` is developed to calculate these metrics efficiently. It also provides several baseline models to predict gene expression from image embeddings, such as MLP.
+We introduce two metrics: **EPS** (Expression Predictability Score) and **SPS** (Slice Predictability Score), to quantify the predictability of gene expression from histology image. Python package `expression_copilot` is developed to calculate these metrics efficiently. It also provides several baseline models to predict gene expression from image embeddings, such as MLP and linear regression.
 
 ![expression_copilot](./resource/EPS.png)
 
@@ -28,38 +28,38 @@ We introduce two metrics: **EPS** (Expression Predictability Score) and **SPS** 
 We recommend to install `expression_copilot` to a new conda environment:
 
 ```sh
-mamba create -n expression_copilot -c conda-forge python=3.11 -y && conda activate expression_copilot
+conda create -n eps python=3.11 -y && conda activate eps
 pip install expression_copilot
 ```
 
 (Optional) If you have CUDA-enabled GPU, you could install `cuml`&`cupy` to accelerate KNN building, and install `torch` to accelerate MLP baseline training:
 ```sh
-mamba create -n expression_copilot_cuda -c conda-forge -c rapidsai -c nvidia python=3.11 rapids=25.06 'cuda-version>=12.0,<=12.8' -y && conda activate expression_copilot_cuda
+conda create -n eps_cuda -c conda-forge -c rapidsai -c nvidia python=3.11 rapids=25.06 'cuda-version>=12.0,<=12.8' -y && conda activate eps_cuda
 pip install expression_copilot[torch]
 ```
 
 ### Docker
-You could use our docker image directly:
+You could also use our pre-built docker image directly:
 
 ```sh
-# CPU version
-docker run -it --rm huhansan666666/expression_copilot:latest
-
 # GPU version
 docker run --gpus all -it --rm huhansan666666/expression_copilot:latest
+
+# CPU version
+docker run -it --rm huhansan666666/expression_copilot:latest
 ```
 
 ## Documentation
 
 ### Quick Start
-The following code snippet shows how to calculate EPS and SPS using `expression_copilot`. We assume you have already preprocessed your spatial transcriptomics data into an `AnnData` object (`adata`), where `adata.X` should store raw counts and `adata.obsm['IMAGE_KEY_NAME']` should store image embeddings of spots. (Preprocessed steps are described in [Advanced Tutorial](./resource/tutorials/2-advanced_tutorial.ipynb) in detail)
+The following code snippet shows how to calculate EPS and SPS via `expression_copilot` package. We assume you have already preprocessed your spatial transcriptomics data into an `AnnData` object (`adata`), where `adata.X` should store raw counts and `adata.obsm['IMAGE_KEY_NAME']` should store image embeddings of spots. (Preprocessed steps are described in [Advanced Tutorial](./resource/tutorials/2-advanced_tutorial.ipynb) in detail)
 
 ```python
 import scanpy as sc
 import numpy as np
 from expression_copilot import ExpressionCopilotModel
 
-# Load our sample data
+# Load data
 # adata.X is raw counts
 # adata.obsm['X_uni'] stores image embeddings of spots
 url = 'https://drive.google.com/uc?id=10WD9vFgsoMoTt6g3017XxNK_bq8qp3oM'

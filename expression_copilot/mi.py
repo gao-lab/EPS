@@ -91,14 +91,14 @@ def _check_vals(
     return vals[idxer], idxer, full_result
 
 
-def graph_signal(
+def calc_eps(
     x: np.ndarray,
     signal: np.ndarray,
     k: int = 10,
     metric: str = "euclidean",
 ) -> np.ndarray:
     r"""
-    Graph Laplacian of the signal on the k-NN graph built from x.
+    Calculate Expression Predictability Score (EPS).
 
     Args:
         x: (n_samples, n_features) for building graph
@@ -110,7 +110,7 @@ def graph_signal(
         signal dim in n_signals first.
 
     Returns:
-        eps (graph laplacian quadratic form)
+        eps: (n_signals, ) or scalar
     """
     knn_index, _ = knn(x, k=k, metric=metric)
     g = knn_to_csr(knn_index)
@@ -120,11 +120,11 @@ def graph_signal(
     if signal.ndim == 1:
         assert g.shape[0] == signal.shape[0]
         W = g_data.sum()
-        eps = _graph_laplacian_1d(g_data, g.indices, g.indptr, signal, W)
+        laplacian = _graph_laplacian_1d(g_data, g.indices, g.indptr, signal, W)
     else:
         assert g.shape[0] == signal.shape[1]
         new_vals, idxer, full_result = _check_vals(signal)
         result = _graph_laplacian_nd(g_data, g.indices, g.indptr, new_vals)
         full_result[idxer] = result
-        eps = full_result
-    return eps
+        laplacian = full_result
+    return -np.log(laplacian)

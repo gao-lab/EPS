@@ -1,6 +1,6 @@
 import numpy as np
 
-from expression_copilot.mi import graph_signal
+from expression_copilot.mi import calc_eps
 
 
 def test_mi():
@@ -12,7 +12,7 @@ def test_mi():
             gene_expr = np.random.rand(100, nd).astype(np.float32).T
             # remove the extra dim
             gene_expr = np.squeeze(gene_expr)
-            eps = graph_signal(image_emb.copy(), gene_expr.copy(), k=k)
+            eps = calc_eps(image_emb.copy(), gene_expr.copy(), k=k)
             print(f"EPS: {eps}")
             sps = eps.mean()
             print(f"SPS: {sps}")

@@ -6,12 +6,12 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry]
 name = "expression_copilot"
 packages = [{include = "expression_copilot"}]
-version = "0.2.1"
+version = "0.3.0"
 description = "Quantifying predictability of gene expression from histology image"
 readme = "README.md"
 license = "MIT"
 authors = ["Chen-Rui Xia <xiachenrui@mail.cbi.pku.edu.cn>"]
-keywords = ["spatialomics", "bioinfomatics"]
+keywords = ["spatialomics", "bioinfomatics", "mutualinformation"]
 homepage = "https://github.com/gao-lab/ExpressionCopilot"
 documentation = "https://github.com/gao-lab/ExpressionCopilot"
 repository = "https://github.com/gao-lab/ExpressionCopilot"
