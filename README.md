@@ -14,7 +14,7 @@
 
 </div>
 
-We introduce two metrics: **EPS** (Expression Predictability Score) and **SPS** (Slice Predictability Score), to quantify the predictability of gene expression from histology image. Python package `expression_copilot` is developed to calculate these metrics efficiently. It also provides several baseline models to predict gene expression from image embeddings, such as MLP and linear regression.
+We introduce metrics: **EPS** (Expression Predictability Score) to quantify the predictability of gene expression from histology image via mutual information. Python package `expression_copilot` is developed to calculate EPS efficiently. It also provides several baseline models for predicting gene expression from image embeddings, such as MLP and linear regression.
 
 ![expression_copilot](./resource/EPS.png)
 
